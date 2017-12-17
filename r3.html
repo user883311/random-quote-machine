@@ -1,0 +1,138 @@
+<!--
+User Story:
+=========
+- I can click a button to show me a new random quote.
+- I can press a button to tweet out a quote.
+-->
+
+<html lang="en">
+
+<head>
+    <!-- CONNECTING WITH QUOTES API -->
+    <script>
+        // Free API was found at https://market.mashape.com/andruxnet/random-famous-quotes#
+
+        function getNewQuote() {
+            var quoteAPI;
+            quoteAPI = new XMLHttpRequest();
+            quoteAPI.open("GET", "https://andruxnet-random-famous-quotes.p.mashape.com/");
+            quoteAPI.setRequestHeader(
+                "X-Mashape-Key", "OivH71yd3tmshl9YKzFH7BTzBVRQp1RaKLajsnafgL2aPsfP9V",
+                "Accept", "application/json",
+                "Content-Type", "application/x-www-form-urlencoded"
+            )
+            quoteAPI.send();
+            quoteAPI.onreadystatechange = function () {
+                var data = JSON.parse(this.response);
+                document.getElementById("quoteText").innerHTML = data.quote;
+                document.getElementById("quoteAuthor").innerHTML = data.author;
+            }
+        }
+        getNewQuote();
+
+        //<!-- CONNECTING WITH SHARE APIs -->
+        // TWITTER
+        var hashtagStr = "quotes";
+        var twitterURL;
+        function twitterShare() {
+            var quote = document.getElementById("quoteText").innerHTML;
+            var author = document.getElementById("quoteAuthor").innerHTML;
+
+
+            twitterURL = "https://twitter.com/intent/tweet?hashtags=" + hashtagStr;
+            twitterURL += "&text=" + quote;
+            twitterURL += " - " + author;
+            window.open(twitterURL);
+        }
+
+                // FACEBOOK
+                // LINKEDIN
+    </script>
+
+    <!-- STYLING -->
+    <title>Random Quote Machine 3</title>
+    <script src="https://use.fontawesome.com/397c5af911.js"></script>
+    <style>
+        body {
+            background: grey;
+        }
+
+        .wrapper {
+            display: grid;
+            border: solid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 10px;
+            grid-auto-rows: 200px;
+            grid-template-areas: ". a a ." ". a a ." ". a a .";
+        }
+
+        .quote-box {
+            grid-area: a;
+            border: solid blue;
+            background: white;
+            align-self: center;
+            justify-self: center;
+
+            display: grid;
+            padding: 10px;
+            grid-template-columns: repeat(6, 1fr);
+            grid-template-areas: "q q q q q q" "a a a a a a" "t f l n n n";
+            grid-gap: 10px;
+        }
+
+        .quote-text {
+            grid-area: q;
+        }
+
+        .quote-author {
+            grid-area: a;
+            justify-self: end;
+        }
+
+        button {}
+
+        .share-button {}
+
+        #newQuoteButton {
+            grid-column: 4/7;
+        }
+
+        #twitterButton {
+            grid-area: t;
+        }
+
+        #facebookButton {
+            grid-area: f;
+        }
+
+        #linkedinButton {
+            grid-area: l;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="quote-box">
+            <div class="quote-text" id="quoteText">Loading...</div>
+            <div class="quote-author" id="quoteAuthor"></div>
+
+            <button id="newQuoteButton" class="btn btn-primary" onclick="getNewQuote()">
+                New Quote
+            </button>
+            <button class="share-button" id="twitterButton" onclick="twitterShare()">
+                <i class="fa fa-twitter"></i>
+            </button>
+            <button class="share-button" id="facebookButton">
+                <i class="fa fa-facebook"></i>
+            </button>
+            <button class="share-button" id="linkedinButton">
+                <i class="fa fa-linkedin"></i>
+            </button>
+
+        </div>
+        <div></div>
+    </div>
+</body>
+
+</html>
