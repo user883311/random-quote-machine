@@ -1,4 +1,4 @@
-# randomQuoteMachine
+# Random Quote Machine
 ## a freecodecamp project
 
 User Story:
