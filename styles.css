@@ -1,0 +1,50 @@
+body {
+    background: grey;
+}
+
+.wrapper {
+    display: grid;
+    border: solid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: 200px;
+    grid-template-areas: ". a a ." ". a a ." ". a a .";
+}
+
+.quote-box {
+    grid-area: a;
+    border: solid blue;
+    background: white;
+    align-self: center;
+    justify-self: center;
+    display: grid;
+    padding: 10px;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-areas: "q q q q q q" "a a a a a a" "t f l n n n";
+    grid-gap: 10px;
+}
+
+.quote-text {
+    grid-area: q;
+}
+
+.quote-author {
+    grid-area: a;
+    justify-self: end;
+}
+
+#newQuoteButton {
+    grid-column: 4/7;
+}
+
+#twitterButton {
+    grid-area: t;
+}
+
+#facebookButton {
+    grid-area: f;
+}
+
+#linkedinButton {
+    grid-area: l;
+}
