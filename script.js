@@ -1,5 +1,4 @@
 // Free API at https://market.mashape.com/andruxnet/random-famous-quotes#
-var count = 0;
 function getNewQuote() {
     var quoteAPI;
     quoteAPI = new XMLHttpRequest();
@@ -15,23 +14,39 @@ function getNewQuote() {
             var data = JSON.parse(this.response);
             document.getElementById("quoteText").innerHTML = data.quote;
             document.getElementById("quoteAuthor").innerHTML = data.author;
-            count++;
-            console.log(count);
         }
     }
 }
 
 //<!-- CONNECTING WITH SHARE APIs -->
-// TWITTER
 var hashtagStr = "quotes";
 var twitterURL;
 function twitterShare() {
-    var quote = document.getElementById("quoteText").innerHTML;
-    var author = document.getElementById("quoteAuthor").innerHTML;
-
-
+    let quote = document.getElementById("quoteText").innerHTML;
+    let author = document.getElementById("quoteAuthor").innerHTML;
     twitterURL = "https://twitter.com/intent/tweet?hashtags=" + hashtagStr;
     twitterURL += "&text=" + quote;
     twitterURL += " - " + author;
     window.open(twitterURL);
+}
+
+function facebookShare() {
+    let h = "https://www.facebook.com/dialog/feed?" +
+        "app_id=145634995501895" +
+        "&display=popup&amp;caption=An%20example%20caption" +
+        "&link=https://user883311.github.io/random-quote-machine/" +
+        "&redirect_uri=https://developers.facebook.com/tools/explorer";
+    window.open(h);
+}
+
+function linkedinShare() {
+    let h = "https://www.linkedin.com/shareArticle" +
+        "?mini=true" +
+        "&url=https://user883311.github.io/random-quote-machine/" +
+        "&title=Quotes" +
+        "&summary=" + document.getElementById("quoteText").textContent +
+        " - " +
+        document.getElementById("quoteAuthor").textContent +
+        "&source=LinkedIn";
+    window.open(h);
 }
