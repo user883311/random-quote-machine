@@ -26,10 +26,14 @@ body {
     margin-top: 7px;
 }
 .btn{
-    background-color: rgb(197,197,197);
-    border-radius: 30%;
+    background-color: rgb(30,30,30);
+    border-color: rgb(30,30,30);;
+    color: rgb(83, 82, 82);
+    border-radius: 20%;
     width: fit-content;
     font-size: 1em;
+    padding-top: 3px;
+    padding-bottom: 3px;
 }
 .btn:hover{
     background-color: rgb(220, 170, 170);
