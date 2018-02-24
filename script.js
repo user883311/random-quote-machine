@@ -1,5 +1,5 @@
 // Free API at https://market.mashape.com/andruxnet/random-famous-quotes#
-
+var count = 0;
 function getNewQuote() {
     var quoteAPI;
     quoteAPI = new XMLHttpRequest();
@@ -11,12 +11,15 @@ function getNewQuote() {
     )
     quoteAPI.send();
     quoteAPI.onreadystatechange = function () {
-        var data = JSON.parse(this.response);
-        document.getElementById("quoteText").innerHTML = data.quote;
-        document.getElementById("quoteAuthor").innerHTML = data.author;
+        if (this.readyState == 4 && this.status == 200) {
+            var data = JSON.parse(this.response);
+            document.getElementById("quoteText").innerHTML = data.quote;
+            document.getElementById("quoteAuthor").innerHTML = data.author;
+            count++;
+            console.log(count);
+        }
     }
 }
-getNewQuote();
 
 //<!-- CONNECTING WITH SHARE APIs -->
 // TWITTER
