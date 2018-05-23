@@ -1,17 +1,18 @@
 // Free API at https://market.mashape.com/andruxnet/random-famous-quotes#
+
 function getNewQuote() {
-    var quoteAPI;
-    quoteAPI = new XMLHttpRequest();
-    quoteAPI.open("GET", "https://andruxnet-random-famous-quotes.p.mashape.com/");
+    let quoteAPI = new XMLHttpRequest();
+    quoteAPI.open("GET", "https://andruxnet-random-famous-quotes.p.mashape.com/?count=1");
     quoteAPI.setRequestHeader(
-        "X-Mashape-Key", "OivH71yd3tmshl9YKzFH7BTzBVRQp1RaKLajsnafgL2aPsfP9V",
+        "X-Mashape-Key", "U4b3CaPdKOmsh1KhijHacuQlJlcpp13WPT0jsn4RERXGyE1PXv",
         "Accept", "application/json",
         "Content-Type", "application/x-www-form-urlencoded"
     )
     quoteAPI.send();
     quoteAPI.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            var data = JSON.parse(this.response);
+        
+        if (this.readyState == 4 && this.status == 200) {            
+            var data = JSON.parse(this.response)[0];
             document.getElementById("quoteText").innerHTML = data.quote;
             document.getElementById("quoteAuthor").innerHTML = data.author;
         }
@@ -21,6 +22,7 @@ function getNewQuote() {
 //<!-- CONNECTING WITH SHARE APIs -->
 var hashtagStr = "quotes";
 var twitterURL;
+
 function twitterShare() {
     let quote = document.getElementById("quoteText").innerHTML;
     let author = document.getElementById("quoteAuthor").innerHTML;
